@@ -1,47 +1,99 @@
-{% load static %}
 <!DOCTYPE html>
+
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Channels webRTC</title>
+    <title>Django Channels WebRTC</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-</head>
-<body>
-    <h3 id="label-username">USERNAME</h3>
-    <div>
-        <input id="username"><button id="btn-join">Join Room</button>
-    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
+        .main-grid-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        #video-container, #chat {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background-color: white;
+            padding: 20px;
+            width: 45%;
+        }
+
+        #video-container video {
+            width: 100%;
+        }
+
+        #video-container button, #chat button {
+            margin-top: 10px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        #chat h3 {
+            margin-top: 0;
+        }
+
+        #chat ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #chat #ct {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 id="label-username" style="text-align: center; padding: 20px 0; background-color: #007bff; color: white;">USERNAME</h3>
+    
+    <div style="text-align: center; padding: 10px 0;">
+        <input id="username" placeholder="Enter your username" style="padding: 10px; width: 200px; border-radius: 5px; border: 1px solid #ddd;">
+        <button id="btn-join" style="padding: 10px 20px; color: white; background-color: #007bff; border: none; border-radius: 5px;">Join Room</button>
+    </div>
+    
     <div class="main-grid-container">
+        
         <div id="video-container">
-            <br>
-            <br>
-            <div><video id="local-video" style="float: left;" autoplay playsinline>
-            </video></div>
-            <br>
+            <video id="local-video" autoplay playsinline></video>
+            
             <button id="btn-toggle-audio">Audio Mute</button>
             <button id="btn-toggle-video">Video Off</button>
         </div>
+        
         <div id="chat">
-            <h3>CHAT</h3>
+            <h3>Chat</h3>
+            
             <div id="messages">
-                <ul id="messages-list"></ul>
+                <ul id="message-list"></ul>
             </div>
-
-            <div>
-                <input id="msg">
-                <button id="btn-send-msg">
-                    Send Message
-                </button>
-                <button id="btn-share-screen">
-                    Share Screen
-                </button>
+            
+            <div id="ct">
+                <input id="msg" placeholder="Type your message..." style="padding: 10px; width: 70%; border-radius: 5px; border: 1px solid #ddd;">
+                <button id="btn-send-msg">Send Message</button>
             </div>
+            
+            <button id="btn-share-screen">Share Screen</button>
         </div>
     </div>
-
+    
+    {% block content %}
+    {% endblock %}
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
