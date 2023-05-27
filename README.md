@@ -10,7 +10,6 @@ This is a real-time video chat application using Django, Django Channels, and We
 
 - Real-time video chat using WebRTC
 - Signaling server using Django Channels and WebSockets
-- Peer-to-peer connection with STUN/TURN servers
 
 ## How It Works
 
